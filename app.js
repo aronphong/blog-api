@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
@@ -9,6 +11,12 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+const mongoose = require('mongoose');
+const mongoDB = 'mongodb+srv://aron:phong@cluster0-c3tz0.mongodb.net/succulent-inventory?retryWrites=true&w=majority'
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
