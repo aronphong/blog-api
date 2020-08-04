@@ -6,7 +6,14 @@ const PostSchema = new Schema({
     title: { type: String, required: true },
     text: { type: String, required: true },
     date: {},
-    published: { type: Boolean }
+    published: { type: Boolean },
+    comments: [
+        {
+            user: { type: String },
+            text: { type: String },
+            date: {}
+        }
+    ]
 });
 
 PostSchema
