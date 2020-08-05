@@ -8,12 +8,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var userRouter = require('./routes/user');
 
 var app = express();
 
 const mongoose = require('mongoose');
-const mongoDB = 'mongodb+srv://aron:phong@cluster0-c3tz0.mongodb.net/succulent-inventory?retryWrites=true&w=majority'
+const mongoDB = process.env.MONGO_URI;
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error'));
@@ -30,7 +30,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/user', userRouter);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
