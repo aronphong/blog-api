@@ -6,9 +6,14 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
 
 var routes = require('./routes/index');
 var userRouter = require('./routes/user');
+
+const User = require('./models/user');
 
 var app = express();
 
@@ -22,12 +27,49 @@ db.on('error', console.error.bind(console, 'MongoDB connection error'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// set up LocalStrategy
+passport.use(
+    new LocalStrategy((username, password, done) => {
+        User.findOne({ username: username }, (err, user) => {
+            console.log("world");
+            if (err) done(err);
+
+            if (!user) {
+                return done(null, false, { msg: "Incorrect username" });
+            }
+
+            bcrypt.compare(password, user.password, (err, res) => {
+                if (res) {
+                    return done(null, user);
+                } else {
+                    // passwords do not match!
+                    return (null, false, { msg: "Incorrect password" });
+                }
+            });
+            return done(null, user);
+        });
+    })
+)
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    User.findById(id, function(err, user) {
+        done(err, user);
+    });
+});
+
 app.use(favicon());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: process.env.sessionSecret, resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/user', userRouter);

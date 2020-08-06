@@ -9,8 +9,11 @@ router.get('/', function(req, res) {
   res.send('respond with a resource');
 });
 
-// GET admin log in page
-// router.get('/user/admin-login', user_controller.adminLogin);
+// GET user log in page
+router.get('/login', user_controller.login_get);
+
+// POST user log in 
+router.post('/login', user_controller.login_post);
 
 // GET user sign up page
 router.get('/sign-up', user_controller.signup_get);
