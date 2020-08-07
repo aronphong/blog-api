@@ -14,6 +14,7 @@ var routes = require('./routes/index');
 var userRouter = require('./routes/user');
 
 const User = require('./models/user');
+require('./config/passport');
 
 var app = express();
 
@@ -26,40 +27,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-// set up LocalStrategy
-passport.use(
-    new LocalStrategy((username, password, done) => {
-        User.findOne({ username: username }, (err, user) => {
-            console.log("world");
-            if (err) done(err);
-
-            if (!user) {
-                return done(null, false, { msg: "Incorrect username" });
-            }
-
-            bcrypt.compare(password, user.password, (err, res) => {
-                if (res) {
-                    return done(null, user);
-                } else {
-                    // passwords do not match!
-                    return (null, false, { msg: "Incorrect password" });
-                }
-            });
-            return done(null, user);
-        });
-    })
-)
-
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-        done(err, user);
-    });
-});
 
 app.use(favicon());
 app.use(logger('dev'));
