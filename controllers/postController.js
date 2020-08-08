@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+require('../config/passport');
 
 const async = require('async');
 
@@ -9,7 +10,7 @@ exports.index = (req, res) => {
             Post.countDocuments({}, callback)
         }
     }, (err, results) => {
-        res.render('index', { title: 'Blog API Home', error: err, data: results })
+        res.render('index', { title: 'Blog API Home', error: err, data: results, user: req.user });
     }
     )
 }

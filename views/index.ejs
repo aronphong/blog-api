@@ -8,6 +8,10 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
+    <% if (user) { %>
+      <p> <%= user.username %> </p>
+    <% } %>  
+
     <% if (error != undefined) { %>
       <p> Error getting dynamic content. </p>
     <% } else { %>
