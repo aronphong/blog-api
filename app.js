@@ -8,7 +8,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const session = require("express-session");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 
 var routes = require('./routes/index');
 var userRouter = require('./routes/user');
@@ -40,6 +39,12 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/user', userRouter);
+
+// access current user in views
+app.use(function(req, res, next) {
+    res.locals.currentUser = req.user;
+    next();
+});
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
