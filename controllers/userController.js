@@ -39,3 +39,7 @@ exports.signup_post = (req, res, next) => {
     });
 };
 
+exports.logout_get = (req, res) => {
+    req.logout();
+    res.redirect("/");
+}
