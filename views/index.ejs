@@ -10,6 +10,9 @@
 
     <% if (user) { %>
       <p> <%= user.username %> </p>
+      <a href="/user/logout">Logout</a>
+
+      <a href="/blog/post/create">Create Post</a>
     <% } %>  
 
     <% if (error != undefined) { %>
@@ -20,7 +23,8 @@
     <ul>
       <li><%= data.post_count %> </li>
     </ul>
-
+    <a href="/user/sign-up">Sign up</a>
+    <a href="/user/login">Login</a>
 
      
   </body>
