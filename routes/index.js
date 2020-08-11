@@ -10,6 +10,9 @@ router.get('/', post_controller.index);
 // GET blog posts
 router.get('/blog/posts', post_controller.blog_posts);
 
+// Get blog post details
+router.get('/blog/post/:id', post_controller.blog_posts_detail);
+
 // GET blog post crete
 router.get('/blog/post/create', post_controller.newpost_create_get);
 

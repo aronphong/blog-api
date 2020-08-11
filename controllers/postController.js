@@ -16,6 +16,7 @@ exports.index = (req, res) => {
     )
 }
 
+// display blog posts on GET
 exports.blog_posts = (req, res, next) => {
 
     Post.find({})
@@ -23,6 +24,16 @@ exports.blog_posts = (req, res, next) => {
             if (err) next(err);
             res.render('blog_posts', {title: 'Blog Posts', blog_list: list_posts });
         });
+}
+
+// display blog post detail on GET
+exports.blog_posts_detail = (req, res, next) => {
+
+    Post.findById(req.params.id)
+        .exec((err, blog_post) => {
+            if (err) next(err);
+            res.render('blog_post_detail', {title: blog_post.title, blog_post: blog_post });
+        })
 }
 
 // display create blog post form on GET
