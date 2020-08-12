@@ -27,13 +27,38 @@ exports.blog_posts = (req, res, next) => {
 }
 
 // display blog post detail on GET
-exports.blog_posts_detail = (req, res, next) => {
+exports.blog_posts_detail_get = (req, res, next) => {
 
     Post.findById(req.params.id)
         .exec((err, blog_post) => {
             if (err) next(err);
             res.render('blog_post_detail', {title: blog_post.title, blog_post: blog_post });
         })
+}
+
+// handle blog post detail on POST
+exports.blog_post_detail_post = (req, res ,next) => {
+
+    const newComment = {
+        text: req.body.newComment,
+        date: new Date(Date.now()).toDateString()
+    };
+
+    const post = Post.findById(req.params.id)
+    .exec((err, blog_post) => {
+        console.log(blog_post.comments)
+        blog_post.comments.push(newComment)
+        // blog_post.update((err) => {
+        //     if (err) next(err);
+        //     res.redirect(blog_post.url);
+        // })
+        console.log(blog_post.comments)
+    });
+
+    Post.findByIdAndUpdate(req.params.id, post, {}, (err, thepost) => {
+        if (err) next(err);
+        res.redirect(thepost.url)
+    });
 }
 
 // display create blog post form on GET
