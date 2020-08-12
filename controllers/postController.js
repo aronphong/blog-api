@@ -44,21 +44,18 @@ exports.blog_post_detail_post = (req, res ,next) => {
         date: new Date(Date.now()).toDateString()
     };
 
-    const post = Post.findById(req.params.id)
-    .exec((err, blog_post) => {
-        console.log(blog_post.comments)
-        blog_post.comments.push(newComment)
-        // blog_post.update((err) => {
-        //     if (err) next(err);
-        //     res.redirect(blog_post.url);
-        // })
-        console.log(blog_post.comments)
-    });
 
-    Post.findByIdAndUpdate(req.params.id, post, {}, (err, thepost) => {
-        if (err) next(err);
-        res.redirect(thepost.url)
-    });
+    Post.findById(req.params.id)
+        .exec((err, blog_post) => {
+
+            blog_post.comments.push(newComment)
+            blog_post.save((err) => {
+                if (err) next(err);
+
+                // successful - redirect to post
+                res.redirect(blog_post.url);
+            })
+        });
 }
 
 // display create blog post form on GET
