@@ -6,7 +6,7 @@ require('../config/passport');
 
 // handle user login on GET
 exports.login_get = (req, res) => {
-    res.render('login_form', { title: 'Sign up now! '});
+    res.render('login_form', { title: 'Sign up now!' });
 };
 
 // handle user login on POST

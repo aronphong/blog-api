@@ -22,7 +22,7 @@ exports.blog_posts = (req, res, next) => {
     Post.find({})
         .exec((err, list_posts) => {
             if (err) next(err);
-            res.render('blog_posts', {title: 'Blog Posts', blog_list: list_posts });
+            res.render('blog_posts', { title: 'Blog Posts', blog_list: list_posts });
         });
 }
 
@@ -32,12 +32,12 @@ exports.blog_posts_detail_get = (req, res, next) => {
     Post.findById(req.params.id)
         .exec((err, blog_post) => {
             if (err) next(err);
-            res.render('blog_post_detail', {title: blog_post.title, blog_post: blog_post });
+            res.render('blog_post_detail', { title: blog_post.postTitle, blog_post: blog_post });
         })
 }
 
 // handle blog post detail on POST
-exports.blog_post_detail_post = (req, res ,next) => {
+exports.blog_post_detail_post = (req, res, next) => {
 
     const newComment = {
         text: req.body.newComment,
@@ -68,10 +68,10 @@ exports.newpost_create_get = (req, res) => {
 exports.newpost_create_post = (req, res, next) => {
 
     const post = new Post({
-        title: req.body.title,
+        postTitle: req.body.postTitle,
         text: req.body.text,
         date: new Date(Date.now()).toDateString(),
-        author: req.user.id,
+        author: req.user._id,
         published: false
     });
 
