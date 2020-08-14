@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const bcrypt = require('bcryptjs')
@@ -8,7 +7,10 @@ const User = require('../models/user');
 passport.use(
     new LocalStrategy((username, password, done) => {
         User.findOne({ username: username }, (err, user) => {
-            if (err) done(err);
+
+            if (err) {
+                return done(err);
+            }
 
             if (!user) {
                 return done(null, false, { msg: "Incorrect username" });
@@ -23,7 +25,7 @@ passport.use(
                 }
             });
             return done(null, user);
-        }).catch(done);
+        })
     })
 );
 
