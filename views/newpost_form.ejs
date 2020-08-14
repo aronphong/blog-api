@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title>Blog API</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
     <h1><%= title %></h1>
 
     <form action="" method="post">
-      <label for="title">Post Title</label>
-      <input name="title" placeholder="Blog Post Title" type="text" />
+      <label for="postTitle">Post Title</label>
+      <input name="postTitle" placeholder="Blog Post Title" type="text" />
       <label for="text">Blog Text</label>
       <input name="text" placeholder="Insert text here" type="text" />
-      
+
+      <label for="publish">Publish Post</label>
+      <input type="radio" name="publish">
+      <label for="notPublished">Do not Publish Post</label>
+      <input type="radio" name="notPublished">
       <button>Create</button>
     </form>
      

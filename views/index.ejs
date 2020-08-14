@@ -9,7 +9,7 @@
     <p>Welcome to <%= title %></p>
 
     <% if (user) { %>
-      <p> <%= user.username %> </p>
+      <p> <%= user._id %> </p>
       <a href="/user/logout">Logout</a>
 
       <a href="/blog/post/create">Create Post</a>

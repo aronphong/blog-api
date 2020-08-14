@@ -17,10 +17,9 @@ router.get('/blog/post/:id', post_controller.blog_posts_detail_get);
 router.post('/blog/post/:id', post_controller.blog_post_detail_post)
 
 // GET blog post crete
-router.get('/blog/post/create', post_controller.newpost_create_get);
+router.get('/blog/post', post_controller.newpost_create_get);
 
 // POST blog post create
-router.post('/blog/post/create', post_controller.newpost_create_post);
-
+router.post('/blog/post', post_controller.newpost_create_post);
 
 module.exports = router;
