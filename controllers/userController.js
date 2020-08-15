@@ -6,18 +6,19 @@ require('../config/passport');
 
 // handle user login on GET
 exports.login_get = (req, res) => {
-    res.render('login_form', { title: 'Sign up now!' });
+    res.render('login_form', { title: 'Sign up now!', user: req.user });
 };
 
 // handle user login on POST
 exports.login_post = passport.authenticate('local', {
+    
     successRedirect: "/",
     failureRedirect: "/user/login"
 });
 
 // handle user sign up on GET
 exports.signup_get = (req, res) => {
-    res.render('signup_form', { title: 'Sign up now!' });
+    res.render('signup_form', { title: 'Sign up now!', user: req.user });
 };
 
 //  handle user sign up on POST

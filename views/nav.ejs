@@ -1,0 +1,11 @@
+<nav>
+    <% if (user != undefined) { %>
+        <p> <%= user._id %> <%= user.username %> </p>
+        <a href="/user/logout">Logout</a>
+        <a href="/blog/post">Create Post</a>
+    <% } else { %>
+        <a href="/user/sign-up">Sign up</a>
+        <a href="/user/login">Login</a>
+    <% } %>   
+    <a href="/blog/posts">View Blog Posts</a>
+</nav>

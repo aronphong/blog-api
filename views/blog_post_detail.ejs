@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Blog API</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= blog_post.postTitle %></h1>
+<%- include layout -%> 
+
     <h3><%= blog_post.date %> </h3>
     <p><%= blog_post.author %> </p>
     <p><%= blog_post.text %> </p>
@@ -16,6 +10,3 @@
         <textarea name="newComment" id="" cols="30" rows="5">Add comment</textarea>
         <button>Submit Comment</button>
     </form>
-     
-  </body>
-</html>

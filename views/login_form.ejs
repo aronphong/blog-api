@@ -1,17 +1,10 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>please log in</h1>
-    <form action="/user/login" method="POST">
+<%- include layout -%> 
+
+<h1>please log in</h1>
+<form action="/user/login" method="POST">
     <label for="username">Username</label>
     <input name="username" placeholder="username" type="text" />
     <label for="password">Password</label>
     <input name="password" type="password" />
     <button>Log In</button>
 </form>
-</body>
-</html>

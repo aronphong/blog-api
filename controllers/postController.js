@@ -22,7 +22,7 @@ exports.blog_posts = (req, res, next) => {
     Post.find({})
         .exec((err, list_posts) => {
             if (err) next(err);
-            res.render('blog_posts', { title: 'Blog Posts', blog_list: list_posts });
+            res.render('blog_posts', { title: 'Blog Posts', blog_list: list_posts, user: req.user });
         });
 }
 
@@ -32,7 +32,7 @@ exports.blog_posts_detail_get = (req, res, next) => {
     Post.findById(req.params.id)
         .exec((err, blog_post) => {
             if (err) next(err);
-            res.render('blog_post_detail', { title: blog_post.postTitle, blog_post: blog_post });
+            res.render('blog_post_detail', { title: blog_post.postTitle, blog_post: blog_post, user: req.user });
         })
 }
 
@@ -61,7 +61,7 @@ exports.blog_post_detail_post = (req, res, next) => {
 // display create blog post form on GET
 exports.newpost_create_get = (req, res) => {
 
-    res.render('newpost_form', { title: 'Create new blog post' });
+    res.render('newpost_form', { title: 'Create new blog post', user: req.user });
 };
 
 // handle create blog post on POST

@@ -1,24 +1,14 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Blog API</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
+<%- include layout -%> 
 
-    <form action="" method="post">
-      <label for="postTitle">Post Title</label>
-      <input name="postTitle" placeholder="Blog Post Title" type="text" />
-      <label for="text">Blog Text</label>
-      <input name="text" placeholder="Insert text here" type="text" />
+<form action="" method="post">
+  <label for="postTitle">Post Title</label>
+  <input name="postTitle" placeholder="Blog Post Title" type="text" />
+  <label for="text">Blog Text</label>
+  <input name="text" placeholder="Insert text here" type="text" />
 
-      <label for="publish">Publish Post</label>
-      <input type="radio" name="publish">
-      <label for="notPublished">Do not Publish Post</label>
-      <input type="radio" name="notPublished">
-      <button>Create</button>
-    </form>
-     
-  </body>
-</html>
+  <label for="publish">Publish Post</label>
+  <input type="radio" name="publish">
+  <label for="notPublished">Do not Publish Post</label>
+  <input type="radio" name="notPublished">
+  <button>Create</button>
+</form>
