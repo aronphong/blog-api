@@ -5,15 +5,11 @@ const async = require('async');
 
 exports.index = (req, res) => {
 
-    async.parallel({
-        post_count: (callback) => {
-            Post.countDocuments({}, callback)
-        }
-    }, (err, results) => {
-
-        res.render('index', { title: 'Blog API Home', error: err, data: results, user: req.user });
-    }
-    )
+    Post.find({})
+    .exec((err, list_posts) => {
+        if (err) next(err);
+        res.render('blog_posts', { title: 'Blog Posts', blog_list: list_posts, user: req.user });
+    });
 }
 
 // display blog posts on GET
