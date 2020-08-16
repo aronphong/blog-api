@@ -1,4 +1,6 @@
 <nav>
+    <a href="/">Home</a>   
+    <a href="/blog/posts">View Blog Posts</a>
     <% if (user != undefined) { %>
         <p> <%= user._id %> <%= user.username %> </p>
         <a href="/user/logout">Logout</a>
@@ -6,6 +8,6 @@
     <% } else { %>
         <a href="/user/sign-up">Sign up</a>
         <a href="/user/login">Login</a>
-    <% } %>   
-    <a href="/blog/posts">View Blog Posts</a>
+    <% } %>
+
 </nav>
