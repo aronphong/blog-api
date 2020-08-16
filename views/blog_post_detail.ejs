@@ -1,11 +1,20 @@
 <%- include layout -%> 
 
     <h3><%= blog_post.date %> </h3>
-    <p><%= blog_post.author %> </p>
+    <p>Author: <%= blog_post.author.username %> </p>
     <p><%= blog_post.text %> </p>
     
-    <h3>Comments</h3>
-    <%= blog_post.comments %> 
+    <div>
+        <h3>Comments</h3>
+        <% blog_post.comments.forEach(comment => { %> 
+            <div>
+                <h5><%= comment.date %> </h5>
+                <p><%= comment.commenter %> </p>
+                <p><%= comment.text %> </p>
+            </div>
+        <% }) %> 
+    </div>
+
     <form action="" method="post">
         <textarea name="newComment" id="" cols="30" rows="5">Add comment</textarea>
         <button>Submit Comment</button>

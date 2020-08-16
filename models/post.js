@@ -3,14 +3,14 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const PostSchema = new Schema({
-    title: { type: String, required: true },
+    postTitle: { type: String, required: true },
     text: { type: String, required: true },
     date: {},
-    author: {type: Schema.Types.ObjectId, ref: 'User', required: true },
+    author: {type: mongoose.Types.ObjectId, ref: 'User' },
     published: { type: Boolean },
     comments: [
         {
-            user: { type: String },
+            commenter: { type: mongoose.Types.ObjectId, ref: 'User' },
             text: { type: String },
             date: {}
         }

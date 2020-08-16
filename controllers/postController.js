@@ -1,4 +1,6 @@
 const Post = require('../models/post');
+const User = require('../models/user');
+
 require('../config/passport');
 
 const async = require('async');
@@ -26,7 +28,9 @@ exports.blog_posts = (req, res, next) => {
 exports.blog_posts_detail_get = (req, res, next) => {
 
     Post.findById(req.params.id)
+        .populate('author')
         .exec((err, blog_post) => {
+
             if (err) next(err);
             res.render('blog_post_detail', { title: blog_post.postTitle, blog_post: blog_post, user: req.user });
         })
@@ -36,6 +40,7 @@ exports.blog_posts_detail_get = (req, res, next) => {
 exports.blog_post_detail_post = (req, res, next) => {
 
     const newComment = {
+        commenter: req.user,
         text: req.body.newComment,
         date: new Date(Date.now()).toDateString()
     };
@@ -67,7 +72,7 @@ exports.newpost_create_post = (req, res, next) => {
         postTitle: req.body.postTitle,
         text: req.body.text,
         date: new Date(Date.now()).toDateString(),
-        author: req.user._id,
+        author: req.user,
         published: false
     });
 
