@@ -1,13 +1,13 @@
-<%- include layout -%> 
+<%- include layout -%>
 
-      <ul>
-        <% blog_list.forEach(element => { %>
-          <li>
-            <h1><%= element.postTitle %> </h1>
-            <h3><%= element.date %> </h3>
-            <p><%= element.author %> </p>
-            <p><%= element.text %> </p>
-            <a href=<%= element.url %>>View full post</a>
-          </li>
-        <% }) %>
-      </ul>
+<ul>
+  <% blog_list.forEach(element => { %>
+  <li>
+    <h1><%= element.postTitle %></h1>
+    <h3><%= element.date %></h3>
+    <p><%= element.author %></p>
+    <p><%= element.text %></p>
+    <a href="<%" ="element.url" %>>View full post</a>
+  </li>
+  <% }) %>
+</ul>
